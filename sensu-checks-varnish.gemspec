@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dev@vmpublishing.com"]
 
   spec.summary       = 'sensu gem to get varnish metrics.'
-  spec.description   = 'sensu gem to get varnish metrics. Uses Json. Support sudo (via flag). Supports more than one varnish instance per host.'
+  spec.description   = 'sensu gem to get varnish metrics. Uses plain data out of varnish. Supports sudo. Supports more than one varnish instance per host.'
   spec.homepage      = "https://github.com/vmpublishing/sensu-checks-varnish"
   spec.license       = 'Nonstandard'
 
