@@ -14,9 +14,9 @@ class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
          default:          false
 
   option :varnish_name,
-         description: 'The varnishd instance to get data from',
-         short: '-n VARNISH_NAME',
-         long: '--name VARNISH_NAME'
+         short:            '-n VARNISH_NAME',
+         long:             '--name VARNISH_NAME',
+         description:      'The varnishd instance to get data from'
 
   option :fields,
          short:            '-f fieldlist',
