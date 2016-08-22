@@ -7,3 +7,10 @@
 /pkg/
 /spec/reports/
 /tmp/
+.buildpath
+
+.idea
+.project
+
+.ruby-version
+
