@@ -55,8 +55,9 @@ class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
     stats_string = `#{command}`
 
     # send them along
-    base_path = config[:scheme]
+    base_path  = config[:scheme]
     base_path += ".#{config[:scheme_append]}" if config[:scheme_append]
+    base_path += ".varnish"
     stats_string.split("\n").each do |stat_line|
       stats = stat_line.split(' ').compact
       output "#{base_path}.#{stats[0].gsub(/[^a-zA-Z0-9_\.]/, '_')}", stats[1]
