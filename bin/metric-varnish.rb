@@ -45,7 +45,7 @@ class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
     command += "sudo " if config[:sudo]
 
     # basic command
-    command += "varnishstat -x -1"
+    command += "varnishstat -1"
 
     # added requested fields (or nothing)
     command += config[:fields].split(',').map{|field| " -f #{field}"}.join(' ')
