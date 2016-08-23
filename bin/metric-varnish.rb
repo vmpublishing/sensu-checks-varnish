@@ -63,6 +63,7 @@ class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
       output "#{base_path}.#{stats[0].gsub(/[^a-zA-Z0-9_\.]/, '_')}", stats[1]
     end
 
+    ok
   end
 
 end
