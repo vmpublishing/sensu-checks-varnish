@@ -48,7 +48,10 @@ class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
     # basic command
     command += "varnishstat -1"
 
-    # added requested fields (or nothing)
+    # add instance name
+    command += " -n #{config[:varnish_name]}" if config[:varnish_name]
+
+    # add requested fields (or nothing)
     command += config[:fields].split(',').map{|field| " -f #{field}"}.join(' ')
 
     # fetch stats
