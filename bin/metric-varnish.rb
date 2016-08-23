@@ -2,6 +2,7 @@
 
 
 require 'sensu-plugin/metric/cli'
+require 'socket'
 
 
 class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
