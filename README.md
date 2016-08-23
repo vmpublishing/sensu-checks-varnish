@@ -1,36 +1,71 @@
-# Sensu::Checks::Varnish
+# sensu-checks-varnish
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sensu/checks/varnish`. To experiment with that code, run `bin/console` for an interactive prompt.
+Sensu gem to get varnish metrics. Uses plain data out of varnish.
+Supports sudo for better access rights management.
+Supports more than one varnish instance per host by letting you define an append string (ie: "hostname.appendstring.varnish.MAIN.cache_hits 1").
 
-TODO: Delete this and the text above, and describe your gem
 
-## Installation
+## DEPENDENCIES
 
-Add this line to your application's Gemfile:
+none
 
-```ruby
-gem 'sensu-checks-varnish'
+
+## INSTALLATION
+
+This gem will give an actual installation explanation, as the default sensu plugins miss it and the sensu documentation lacks any detailed explanation.
+
+If this gem is listed in rubygems.org, you can just go ahead and do
+~~sensu-install -p sensu-check-varnish~~
+
+
+Updated:
+As Sensu expects the naming to be "sensu-plugins-FOO", you need to do it another way:
+```
+/opt/sensu/embedded/bin/gem install --no-ri --no-rdoc sensu-checks-varnish
 ```
 
-And then execute:
+If this does not work for you, you can still install it; the hard way.
+```
+git clone git@github.com:vmpublishing/sensu-checks-varnish [SOME_PATH]
+cd [SOME_PATH]
+/opt/sensu/embedded/bin/gem build *.gemspec
+/opt/sensu/embedded/bin/gem install *.gem
+```
 
-    $ bundle
+Alter `/opt/sensu/embedded/bin/gem` to the path to the gem-file sensu uses on your machine.
 
-Or install it yourself as:
 
-    $ gem install sensu-checks-varnish
+## USAGE
 
-## Usage
+### metrics
 
-TODO: Write usage instructions here
+#### Parameters
 
-## Development
+| name | parameter_name | default value | required | description |
+|------|----------------|---------------|----------|-------------|
+| sudo | -s, --sudo | false | no | boolean, turns sudo usage on. (ie: `sudo varnishstat -1`) |
+| varnish_name | -n, --name | '' | no | custom varnish instance name. Varnish defaults to node name, so this is not required. |
+| fields | -f, --fields | '' | no | a comma separated list of fields to get, instead of everything. ie: `varnishstat -1 -f field1 -f field2` |
+| scheme | -C, --scheme | [hostname].varnish | no | Metric naming scheme, text to prepend to metric and scheme_append |
+| scheme_append | -S, --scheme_append | nil | no | Set a string that will be placed right after the host identification and the script identification but before the measurements (ie. hostname.varnish.scheme_append.slow_requests) |
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+#### sample json config file for sockets
+```
+{
+  "metrics": {
+    "metric_varnish": {
+      "type":         "metric",
+      "command":      "metric-varnish.rb -s",
+      "standalone":   true,
+      "interval":     10,
+      "timeout":      120,
+      "ttl":          180
+    }
+  }
+}
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
-## Contributing
+## CONTRIBUTING
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sensu-checks-varnish.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/vmpublishing/sensu-checks-varnish.
