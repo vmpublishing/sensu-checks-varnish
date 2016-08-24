@@ -47,7 +47,7 @@ Alter `/opt/sensu/embedded/bin/gem` to the path to the gem-file sensu uses on yo
 | varnish_name | -n, --name | '' | no | custom varnish instance name. Varnish defaults to node name, so this is not required. |
 | fields | -f, --fields | '' | no | a comma separated list of fields to get, instead of everything. ie: `varnishstat -1 -f field1 -f field2` |
 | scheme | -C, --scheme | [hostname].varnish | no | Metric naming scheme, text to prepend to metric and scheme_append |
-| scheme_append | -S, --scheme_append | nil | no | Set a string that will be placed right after the host identification and the script identification but before the measurements (ie. hostname.varnish.scheme_append.slow_requests) |
+| scheme_append | -S, --scheme_append | nil | no | Set a string that will be placed right after the host identification and the script identification but before the measurements (ie. hostname.scheme_append.varnish.slow_requests) |
 
 #### sample json config file for sockets
 ```
