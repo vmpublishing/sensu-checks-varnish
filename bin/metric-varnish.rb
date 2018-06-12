@@ -7,6 +7,11 @@ require 'socket'
 
 class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
 
+  option :application_path,
+         short:            '-a APPLICATION_PATH',
+         long:             '--application-path APPLICATION_PATH',
+         description:      'specify the varnishstat absolute path',
+         default:          'varnishstat'
   option :sudo,
          short:            '-s',
          long:             '--sudo',
@@ -46,7 +51,7 @@ class MetricVarnish < Sensu::Plugin::Metric::CLI::Graphite
     command += "sudo " if config[:sudo]
 
     # basic command
-    command += "varnishstat -1"
+    command += "#{config[:application_path]} -1"
 
     # add instance name
     command += " -n #{config[:varnish_name]}" if config[:varnish_name]
